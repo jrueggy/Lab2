@@ -2,22 +2,22 @@
 {
     public class CuentaYape
     {
-        float saldo;
-        float userId;
+        int saldo;
+        string userId;
 
-        float consultaSaldo()
+        int consultaSaldo()
         {
             return 0;
         }
 
-        void recargaCuenta(float monto)
+        void recargaCuenta(int monto)
         {
             return;
         }
 
-        void pagar(CuentaYape cuentaAbono)
+        bool pagar(CuentaYape cuentaAbono)
         {
-            return;
+            return false;
         }
     }
 }
