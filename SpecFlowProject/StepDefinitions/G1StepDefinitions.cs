@@ -40,7 +40,8 @@ namespace SpecFlowProject.StepDefinitions
         [Then(@"el resultado de la transaccion es True")]
         public void ThenElResultadoDeLaTransaccionEsTrue()
         {
-            throw new PendingStepException();
+            bool pago = (bool)ctx["pago"];
+            pago.Should().BeTrue();
         }
 
         [Then(@"usuario tiene (.*) soles de saldo")]
@@ -54,7 +55,10 @@ namespace SpecFlowProject.StepDefinitions
         [Then(@"vendedor tiene (.*) soles de saldo")]
         public void ThenVendedorTieneSolesDeSaldo(int p0)
         {
-            throw new PendingStepException();
+            CuentaYape cuentaVendedor = (CuentaYape)ctx["cuentaVendedor"];
+            int saldoVendedor = cuentaVendedor.consultaSaldo();
+
+            saldoVendedor.Should().Be(p0);
         }
 
         [Then(@"el resultado de la transaccion es False")]
