@@ -5,7 +5,14 @@ namespace SpecFlowProject.StepDefinitions
 {
     [Binding]
     public class G1StepDefinitions
-    {
+    {   
+        ScenarioContext ctx;
+        
+        public class G1StepDefinitions(ScenarioContext context)
+        {
+            ctx = context;
+        }
+
         [Given(@"Una cuenta del usuario con (.*) soles de saldo")]
         public void GivenUnaCuentaDelUsuarioConSolesDeSaldo(int p0)
         {
@@ -46,6 +53,21 @@ namespace SpecFlowProject.StepDefinitions
         public void ThenElResultadoDeLaTransaccionEsFalse()
         {
             throw new PendingStepException();
+        }
+
+        [When(@"usuario consulta su saldo")]
+        public void UsuarioConsultaSuSaldo()
+        {
+            CuentaYape usuario =  (CuentaYape)ctx["clase"];
+            int saldo = usuario.consultaSaldo();
+            ctx.Add("resultadoSaldo", saldo);
+        }
+
+        [Then(@"usuario recibe su saldo de (.*) soles")]
+        public void UsuarioRecibeSuSaldoDeSoles(int p0)
+        {
+            int sald = (int)ctx["resultadoSaldo"];
+            sald.Should().Be(p0)
         }
     }
 }

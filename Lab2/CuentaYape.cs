@@ -7,7 +7,7 @@
 
         int consultaSaldo()
         {
-            return 0;
+            return saldo;
         }
 
         void recargaCuenta(int monto)
