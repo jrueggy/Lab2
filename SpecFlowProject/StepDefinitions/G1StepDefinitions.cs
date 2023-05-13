@@ -1,3 +1,4 @@
+using Lab2;
 using System;
 using TechTalk.SpecFlow;
 
@@ -8,7 +9,7 @@ namespace SpecFlowProject.StepDefinitions
     {   
         ScenarioContext ctx;
         
-        public class G1StepDefinitions(ScenarioContext context)
+        public G1StepDefinitions(ScenarioContext context)
         {
             ctx = context;
         }
@@ -67,7 +68,7 @@ namespace SpecFlowProject.StepDefinitions
         public void UsuarioRecibeSuSaldoDeSoles(int p0)
         {
             int sald = (int)ctx["resultadoSaldo"];
-            sald.Should().Be(p0)
+            sald.Should().Be(p0);
         }
     }
 }

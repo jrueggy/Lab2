@@ -5,19 +5,35 @@
         int saldo;
         string userId;
 
-        int consultaSaldo()
+        public CuentaYape(int saldo)
+        {
+            this.saldo = saldo;
+        }
+
+        public int consultaSaldo()
         {
             return saldo;
         }
 
-        void recargaCuenta(int monto)
+        public void recargaCuenta(int monto)
         {
-            return;
+            this.saldo += monto;
         }
 
-        bool pagar(CuentaYape cuentaAbono)
+        public bool pagar(CuentaYape cuentaAbono, int monto)
         {
-            return false;
+            if(cuentaAbono == null) {
+                return false;
+            }
+
+            if(this.consultaSaldo() < monto)
+            {
+                return false;
+            }
+
+            this.saldo -= monto;
+            cuentaAbono.recargaCuenta(monto);
+            return true;
         }
     }
 }

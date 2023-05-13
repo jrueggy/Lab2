@@ -1,9 +1,15 @@
 ﻿Feature: G2
 
-A short summary of the feature
+Consulta saldo
 
 @tag1
-Scenario: [scenario name]
-	Given [context]
-	When [action]
-	Then [outcome]
+Scenario: Consulta saldo
+	Given Una cuenta de usuario con <montoInicial> soles de saldo
+	When Se consulta el saldo de la cuenta
+	Then Se muestra que el saldo de la cuenta es <montoInicial>
+
+Examples: Montos
+	| montoInicial | montoConsultado |
+	| 10          | 10             |
+	| 999          | 999             |
+	| 982          | 982             |
