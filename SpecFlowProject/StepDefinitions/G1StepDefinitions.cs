@@ -17,19 +17,24 @@ namespace SpecFlowProject.StepDefinitions
         [Given(@"Una cuenta del usuario con (.*) soles de saldo")]
         public void GivenUnaCuentaDelUsuarioConSolesDeSaldo(int p0)
         {
-            throw new PendingStepException();
+            CuentaYape cuentaUsuario = new CuentaYape(p0);
+            ctx.Add("cuentaUsuario", cuentaUsuario);
         }
 
         [Given(@"Una cuenta del vendedor con (.*) soles de saldo")]
         public void GivenUnaCuentaDelVendedorConSolesDeSaldo(int p0)
         {
-            throw new PendingStepException();
+            CuentaYape cuentaVendedor = new CuentaYape(p0);
+            ctx.Add("cuentaVendedor", cuentaVendedor);
         }
 
         [When(@"usuario compra artículo de (.*) soles de valor")]
         public void WhenUsuarioCompraArticuloDeSolesDeValor(int p0)
         {
-            throw new PendingStepException();
+            CuentaYape cuentaUsuario = (CuentaYape)ctx["cuentaUsuario"];
+            CuentaYape cuentaVendedor = (CuentaYape)ctx["cuentaVendedor"];
+            bool pago = cuentaUsuario.pagar(cuentaVendedor, p0);
+            ctx.Add("pago", pago);
         }
 
         [Then(@"el resultado de la transaccion es True")]
@@ -41,7 +46,9 @@ namespace SpecFlowProject.StepDefinitions
         [Then(@"usuario tiene (.*) soles de saldo")]
         public void ThenUsuarioTieneSolesDeSaldo(int p0)
         {
-            throw new PendingStepException();
+            CuentaYape cuentaUsuario = (CuentaYape)ctx["cuentaUsuario"];
+            int saldo = cuentaUsuario.consultaSaldo();
+            saldo.Should().Be(p0);
         }
 
         [Then(@"vendedor tiene (.*) soles de saldo")]
@@ -53,22 +60,8 @@ namespace SpecFlowProject.StepDefinitions
         [Then(@"el resultado de la transaccion es False")]
         public void ThenElResultadoDeLaTransaccionEsFalse()
         {
-            throw new PendingStepException();
-        }
-
-        [When(@"usuario consulta su saldo")]
-        public void UsuarioConsultaSuSaldo()
-        {
-            CuentaYape usuario =  (CuentaYape)ctx["clase"];
-            int saldo = usuario.consultaSaldo();
-            ctx.Add("resultadoSaldo", saldo);
-        }
-
-        [Then(@"usuario recibe su saldo de (.*) soles")]
-        public void UsuarioRecibeSuSaldoDeSoles(int p0)
-        {
-            int sald = (int)ctx["resultadoSaldo"];
-            sald.Should().Be(p0);
+            bool pago = (bool)ctx["pago"];
+            pago.Should().Be(false);
         }
     }
 }
