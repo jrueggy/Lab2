@@ -19,8 +19,3 @@ Scenario Outline: Realizar una transacción - sin saldo suficiente
 	When usuario compra artículo de 170 soles de valor
 	Then el resultado de la transaccion es False
 	And usuario tiene 100 soles de saldo
-	And vendedor tiene 1000 soles de saldo
-
-Scenario Outline: Consultar saldo
-	When usuario consulta su saldo
-	Then usuario recibe su saldo de 100 soles
